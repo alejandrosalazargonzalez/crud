@@ -19,7 +19,7 @@ import java.util.Set;
  */
 public class FileOperations implements Operations {
     File fichero;
-    String path = "/home/salazar/programacion-DAM/tema4/teoria/java-ficheros/src/main/resources/archivo.txt";
+    String path = "/home/salazar/crud/crud/src/main/resources/archivo.txt";
     public FileOperations(){
         fichero = new File(path);
         if (!fichero.exists() || !fichero.isFile()) {
@@ -41,11 +41,12 @@ public class FileOperations implements Operations {
         }
         return create(empleado.toString(), fichero);
         }
-        private boolean create(String data,File file) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
-            writer.write(data);
-            writer.newLine(); // Añadir una nueva línea después del registro
-            return true;
+
+    private boolean create(String data,File file) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
+        writer.write(data);
+        writer.newLine(); // Añadir una nueva línea después del registro
+        return true;
         } catch (IOException e) {
             return false;
         }
@@ -64,8 +65,8 @@ public class FileOperations implements Operations {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                String[] arrayLine = line.split(",");
-                Empleado empleado = new Empleado(arrayLine[0],arrayLine[1],arrayLine[2], Long.valueOf(arrayLine [3]),arrayLine[4]);
+                String[] arrayLine = line.trim().split(",");
+                Empleado empleado = new Empleado(arrayLine[0],arrayLine[1],arrayLine[2], Double.valueOf(arrayLine [3]),arrayLine[4]);
                 empleados.add(empleado);
             }
         } catch (IOException e) {
@@ -158,7 +159,7 @@ public class FileOperations implements Operations {
         Set<Empleado> empleados = read(fichero);
         for (Empleado empleado2 : empleados) {
             if (empleado2.equals(empleado)) {
-                return empleado;
+                return empleado2;
             }
         }
         return null;

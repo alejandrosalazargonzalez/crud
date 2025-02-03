@@ -1,6 +1,4 @@
 package es.ies.puerto.model;
-
-import java.io.File;
 import java.util.Set;
 
 /**
