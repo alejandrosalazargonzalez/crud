@@ -192,14 +192,17 @@ public class FileOperations implements Operations {
         if (fechaInicio == null || fechaInicio.isEmpty() || fechaFin == null ||fechaFin.isEmpty()) {
             return new HashSet<>();
         }
-        DateTimeFormatter formato = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate inicio = LocalDate.parse(fechaInicio,formato);
         LocalDate fin = LocalDate.parse(fechaFin,formato);
+        if (inicio.isAfter(fin)) {
+            return new HashSet<>();
+        }
         Set<Empleado> empleados = read(fichero);
         Set<Empleado> porEdad = new HashSet<>();
         for (Empleado empleado : empleados) {
             LocalDate cumpleanio = LocalDate.parse(empleado.getFechaNacimiento(),formato);
-            if (cumpleanio.isAfter(inicio) && cumpleanio.isBefore(fin)) {
+            if (cumpleanio.isAfter(inicio) || cumpleanio.isEqual(inicio) && cumpleanio.isBefore(fin) || cumpleanio.isEqual(fin)) {
                 porEdad.add(empleado);
             }
         }
