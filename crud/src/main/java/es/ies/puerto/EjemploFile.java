@@ -13,6 +13,7 @@ public class EjemploFile {
     public static void main(String[] args) {
         Empleado empleado = new Empleado("1", "Alex", "Vicedirector", 20000,"13/10/1994");
         System.out.println(empleado);
+        System.out.println(empleado.getEdad());
 
         FileOperations operaciones = new FileOperations();
         boolean insertar = operaciones.create(empleado);
@@ -26,5 +27,7 @@ public class EjemploFile {
         System.out.println("Persona encontrada: " + personaBuscar);
         Empleado personaBuscar2 = new Empleado("1","Nicolas","Accionista",100000,"14/11/1987");
         System.out.println(operaciones.update(personaBuscar2));
+        System.out.println(operaciones.empleadosPorPuesto("Accionista"));
+        System.out.println(operaciones.empleadosPorEdad("1/1/1970", "1/1/2004"));
     }    
 }

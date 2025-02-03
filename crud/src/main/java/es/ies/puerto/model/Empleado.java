@@ -1,5 +1,6 @@
 package es.ies.puerto.model;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Empleado {
@@ -85,14 +86,14 @@ public class Empleado {
      * @return int edad
      */
     public int getEdad(){
-        LocalDate edad = LocalDate.parse(fechaNacimiento);
-        return edad.compareTo(LocalDate.now());
+        LocalDate edad = LocalDate.parse(fechaNacimiento,DateTimeFormatter.ofPattern("d/MM/yyyy"));
+        return LocalDate.now().compareTo(edad);
     }
 
 
     @Override
     public String toString() {
-        return getIdentificador() + "," + getNombre() + ", " + getPuesto() + ", " + getSueldo() + ", " + getFechaNacimiento();
+        return getIdentificador() + ", " + getNombre() + ", " + getPuesto() + ", " + getSueldo() + ", " + getFechaNacimiento();
     }
 
     @Override

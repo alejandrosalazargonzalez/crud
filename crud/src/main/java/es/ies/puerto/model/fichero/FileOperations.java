@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -176,7 +177,7 @@ public class FileOperations implements Operations {
         Set<Empleado> empleados = read(fichero);
         Set<Empleado> porPuesto = new HashSet<>();
         for (Empleado empleado : empleados) {
-            if (empleado.getPuesto().equals(puesto)) {
+            if (empleado.getPuesto().trim().equals(puesto.trim())) {
                 porPuesto.add(empleado);
             }
         }
@@ -191,12 +192,14 @@ public class FileOperations implements Operations {
         if (fechaInicio == null || fechaInicio.isEmpty() || fechaFin == null ||fechaFin.isEmpty()) {
             return new HashSet<>();
         }
-        int inicio = LocalDate.parse(fechaInicio).compareTo(LocalDate.now());
-        int fin = LocalDate.parse(fechaFin).compareTo(LocalDate.now());
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("d/MM/yyyy");
+        LocalDate inicio = LocalDate.parse(fechaInicio,formato);
+        LocalDate fin = LocalDate.parse(fechaFin,formato);
         Set<Empleado> empleados = read(fichero);
         Set<Empleado> porEdad = new HashSet<>();
         for (Empleado empleado : empleados) {
-            if (empleado.getEdad() >= inicio && empleado.getEdad() <= fin) {
+            LocalDate cumpleanio = LocalDate.parse(empleado.getFechaNacimiento(),formato);
+            if (cumpleanio.isAfter(inicio) && cumpleanio.isBefore(fin)) {
                 porEdad.add(empleado);
             }
         }
