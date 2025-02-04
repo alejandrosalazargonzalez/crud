@@ -20,7 +20,7 @@ import java.util.Set;
  */
 public class FileOperations implements Operations {
     File fichero;
-    String path = "/home/salazar/crud/crud/src/main/resources/archivo.txt";
+    String path = "/home/bae2/crud/crud/src/main/resources/archivo.txt";
     public FileOperations(){
         fichero = new File(path);
         if (!fichero.exists() || !fichero.isFile()) {
@@ -148,6 +148,9 @@ public class FileOperations implements Operations {
      */
     @Override
     public Empleado read(String identificador) {
+        if (identificador == null || identificador.isEmpty()) {
+            return new Empleado();
+        }
         Empleado empleado = new Empleado(identificador) ;
         return read(empleado);
     }
@@ -157,6 +160,9 @@ public class FileOperations implements Operations {
      */
     @Override
     public Empleado read(Empleado empleado) {
+        if(empleado == null){
+            return new Empleado();
+        }
         Set<Empleado> empleados = read(fichero);
         for (Empleado empleado2 : empleados) {
             if (empleado2.equals(empleado)) {
