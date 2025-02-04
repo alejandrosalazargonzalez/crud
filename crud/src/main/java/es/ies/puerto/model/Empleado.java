@@ -93,7 +93,7 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return getIdentificador() + ", " + getNombre() + ", " + getPuesto() + ", " + getSueldo() + ", " + getFechaNacimiento();
+        return getIdentificador() + "," + getNombre() + "," + getPuesto() + "," + getSueldo() + "," + getFechaNacimiento();
     }
 
     @Override

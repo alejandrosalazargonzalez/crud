@@ -28,6 +28,6 @@ public class EjemploFile {
         Empleado personaBuscar2 = new Empleado("1","Nicolas","Accionista",100000,"14/11/1987");
         System.out.println(operaciones.update(personaBuscar2));
         System.out.println(operaciones.empleadosPorPuesto("Accionista"));
-        System.out.println(operaciones.empleadosPorEdad("1/1/1970", "1/1/2004"));
+        System.out.println(operaciones.empleadosPorEdad("01/02/1970", "01/04/2004"));
     }    
 }

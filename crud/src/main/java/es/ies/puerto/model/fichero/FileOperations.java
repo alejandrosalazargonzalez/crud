@@ -160,10 +160,10 @@ public class FileOperations implements Operations {
      */
     @Override
     public Empleado read(Empleado empleado) {
+        Set<Empleado> empleados = read(fichero);
         if(empleado == null){
             return new Empleado();
         }
-        Set<Empleado> empleados = read(fichero);
         for (Empleado empleado2 : empleados) {
             if (empleado2.equals(empleado)) {
                 return empleado2;
