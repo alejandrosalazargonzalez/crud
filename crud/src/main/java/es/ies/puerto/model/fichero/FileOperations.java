@@ -43,7 +43,7 @@ public class FileOperations implements Operations {
         return create(empleado.toString(), fichero);
         }
 
-    private boolean create(String data,File file) {
+    protected boolean create(String data,File file) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
         writer.write(data);
         writer.newLine(); // Añadir una nueva línea después del registro
@@ -58,7 +58,7 @@ public class FileOperations implements Operations {
      * @param file donde se encuentra la informacion
      * @return Set<Empleado>
      */
-    private Set<Empleado> read(File file) {
+    protected Set<Empleado> read(File file) {
     if (file == null) {
         return new HashSet<>();
     }
@@ -107,7 +107,7 @@ public class FileOperations implements Operations {
      * @param file donde va la informacion
      * @return true/false
      */
-    private boolean updateFile(Set<Empleado> empleados, File file){
+    protected boolean updateFile(Set<Empleado> empleados, File file){
         String path = file.getAbsolutePath();
         try {
             file.delete();
