@@ -53,6 +53,11 @@ public class FileOperationsMap extends FileOperations {
         return empleadosMap;
     }
 
+    /**
+     * Actualiza la informcion 
+     * @param empleado
+     * @return
+     */
     public boolean updateMap(Empleado empleado) {
         if (empleado == null || empleado.getIdentificador().isEmpty() || empleado.getIdentificador() == null) {
             return false;
