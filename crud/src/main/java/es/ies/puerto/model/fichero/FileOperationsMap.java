@@ -17,13 +17,34 @@ public class FileOperationsMap extends FileOperations {
         super();
     }
 
+    public boolean createMap(Empleado empleado) {
+        if (empleado == null || empleado.getIdentificador().isEmpty() || empleado.getIdentificador() == null) {
+            return false;
+        }
+        Map<String,Empleado> empleados = readMap(fichero);
+        if (empleados.containsKey(empleado.getIdentificador())) {
+            return false;
+        }
+        empleados.put(empleado.getIdentificador(), empleado);
+        try {
+            super.fichero.delete();
+            super.fichero.createNewFile();
+            for (Empleado empleado2 : empleados.values()) {
+                create(empleado.toString(), fichero);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+        }
+
     /**
      * lee un archivo y lo retorna como map
      * @param file a leer
      * @return Map<String,Empleado>
      */
     private Map<String, Empleado> readMap(File file){
-        Map<String,Empleado> empleadosMap = new TreeMap();
+        Map<String,Empleado> empleadosMap = new TreeMap<>();
         Set<Empleado> empleados = super.read(file);
         for (Empleado empleado : empleados) {
             empleadosMap.put(empleado.getIdentificador(), empleado);

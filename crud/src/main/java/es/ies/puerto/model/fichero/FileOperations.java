@@ -32,7 +32,6 @@ public class FileOperations implements Operations {
      * Añade un empleado al archivo
      */
     @Override
-    /** */
     public boolean create(Empleado empleado) {
         if (empleado == null || empleado.getIdentificador().isEmpty() || empleado.getIdentificador() == null) {
             return false;
