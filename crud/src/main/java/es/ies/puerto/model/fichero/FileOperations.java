@@ -29,7 +29,7 @@ public class FileOperations implements Operations {
     }
 
     /**
-     * Añade un empleado al archivo
+     * Aniade un empleado al archivo
      */
     @Override
     public boolean create(Empleado empleado) {
@@ -43,10 +43,16 @@ public class FileOperations implements Operations {
         return create(empleado.toString(), fichero);
         }
 
+    /**
+     * Aniade un empleado
+     * @param data el empleado
+     * @param file fichero donde se escribe
+     * @return true/false
+     */
     protected boolean create(String data,File file) {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file, true))) {
         writer.write(data);
-        writer.newLine(); // Añadir una nueva línea después del registro
+        writer.newLine();
         return true;
         } catch (IOException e) {
             return false;
@@ -62,18 +68,18 @@ public class FileOperations implements Operations {
     if (file == null) {
         return new HashSet<>();
     }
-        Set <Empleado>empleados = new HashSet<>();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                String[] arrayLine = line.trim().split(",");
-                Empleado empleado = new Empleado(arrayLine[0],arrayLine[1],arrayLine[2], Double.valueOf(arrayLine [3]),arrayLine[4]);
-                empleados.add(empleado);
-            }
-        } catch (IOException e) {
-            return new HashSet<>();
+    Set <Empleado>empleados = new HashSet<>();
+    try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            String[] arrayLine = line.trim().split(",");
+            Empleado empleado = new Empleado(arrayLine[0],arrayLine[1],arrayLine[2], Double.valueOf(arrayLine [3]),arrayLine[4]);
+            empleados.add(empleado);
         }
-        return empleados;
+    } catch (IOException e) {
+        return new HashSet<>();
+    }
+    return empleados;
     }
     
     /**

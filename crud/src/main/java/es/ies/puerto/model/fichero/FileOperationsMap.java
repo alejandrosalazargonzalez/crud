@@ -2,6 +2,7 @@
 package es.ies.puerto.model.fichero;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -50,6 +51,65 @@ public class FileOperationsMap extends FileOperations {
             empleadosMap.put(empleado.getIdentificador(), empleado);
         }
         return empleadosMap;
+    }
+
+    public boolean updateMap(Empleado empleado) {
+        if (empleado == null || empleado.getIdentificador().isEmpty() || empleado.getIdentificador() == null) {
+            return false;
+        }
+        Map<String,Empleado> empleados = readMap(fichero);
+        if (!empleados.containsKey(empleado.getIdentificador())) {
+            return false;
+        }
+        for (Empleado empleadoBuscada : empleados.values()) {
+            if (empleadoBuscada.equals(empleado)) {
+                empleados.put(empleado.getIdentificador(),empleado);
+                return updateFileMap(empleados, fichero);
+            }
+        }
+        System.out.println(empleados);
+        return true;
+    }
+
+    /**
+     * Actualiza la informacion del ficher0
+     * @param empleados de la empresa
+     * @param file donde va la informacion
+     * @return true/false
+     */
+    protected boolean updateFileMap(Map<String,Empleado> empleados, File file){
+        try {
+            file.delete();
+            file.createNewFile();
+        } catch (IOException e) {
+            return false;
+        }
+        for(Empleado empleado : empleados.values()){
+            create(empleado);
+        }
+        return true;
+    }
+
+    /**
+     * Elimina a un empleado
+     */
+    @Override
+    public boolean delete(Empleado empleado) {
+        if (empleado == null || empleado.getIdentificador().isEmpty() || empleado.getIdentificador() == null) {
+            return false;
+        }
+        Map<String,Empleado> empleados = readMap(fichero);
+        if (!empleados.containsKey(empleado.getIdentificador())) {
+            return false;
+        }
+        for (Empleado empleadoBuscada : empleados.values()) {
+            if (empleadoBuscada.equals(empleado)) {
+                empleados.remove(empleadoBuscada.getIdentificador());
+                return updateFileMap(empleados, fichero);
+            }
+        }
+        System.out.println(empleados);
+        return true;
     }
 
     /**
