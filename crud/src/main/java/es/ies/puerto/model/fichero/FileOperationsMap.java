@@ -17,6 +17,11 @@ public class FileOperationsMap extends FileOperations {
         super();
     }
 
+    /**
+     * lee un archivo y lo retorna como map
+     * @param file a leer
+     * @return Map<String,Empleado>
+     */
     private Map<String, Empleado> readMap(File file){
         Map<String,Empleado> empleadosMap = new TreeMap();
         Set<Empleado> empleados = super.read(file);
@@ -26,6 +31,11 @@ public class FileOperationsMap extends FileOperations {
         return empleadosMap;
     }
 
+    /**
+     * busca empleados por su puerto de trabajo
+     * @param puesto
+     * @return Map<String,Empleado>
+     */
     private Map<String, Empleado> empleadosPorPuestoMap(String puesto){
         Map<String,Empleado> empleadosPorPuestoMap = new TreeMap();
         Set<Empleado> empleados = super.empleadosPorPuesto(puesto);
@@ -35,6 +45,12 @@ public class FileOperationsMap extends FileOperations {
         return empleadosPorPuestoMap;
     }
 
+    /**
+     * busca a los empleados segun su edad
+     * @param fechaInicio de busqueda
+     * @param fechaFin de busqueda
+     * @return Map<String,Empleado>
+     */
     private Map<String, Empleado> empleadosPorEdadMap(String fechaInicio, String fechaFin){
         Map<String,Empleado> empleadosPorEdadMap = new TreeMap();
         Set<Empleado> empleados = super.empleadosPorEdad(fechaInicio,fechaFin);

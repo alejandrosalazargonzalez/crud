@@ -1,8 +1,8 @@
 package es.ies.puerto;
 
 import es.ies.puerto.model.Empleado;
-import es.ies.puerto.model.Operations;
 import es.ies.puerto.model.fichero.FileOperations;
+import es.ies.puerto.model.fichero.FileOperationsMap;
 
 /**
  *  @author: alejandrosalazargonzalez
@@ -14,8 +14,8 @@ public class EjemploFile {
         Empleado empleado = new Empleado("1", "Alex", "Vicedirector", 20000,"13/10/1994");
         System.out.println(empleado);
         System.out.println(empleado.getEdad());
-
         FileOperations operaciones = new FileOperations();
+        FileOperationsMap operacionesMap = new FileOperationsMap();
         boolean insertar = operaciones.create(empleado);
         if (insertar) {
             System.out.println("Se ha insertado correctamente");
@@ -29,5 +29,6 @@ public class EjemploFile {
         System.out.println(operaciones.update(personaBuscar2));
         System.out.println(operaciones.empleadosPorPuesto("Accionista"));
         System.out.println(operaciones.empleadosPorEdad("01/02/1970", "01/04/2004"));
+        System.out.println(operacionesMap.read(empleado));
     }    
 }

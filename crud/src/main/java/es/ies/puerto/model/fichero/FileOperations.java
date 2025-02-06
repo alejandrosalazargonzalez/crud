@@ -32,6 +32,7 @@ public class FileOperations implements Operations {
      * Añade un empleado al archivo
      */
     @Override
+    /** */
     public boolean create(Empleado empleado) {
         if (empleado == null || empleado.getIdentificador().isEmpty() || empleado.getIdentificador() == null) {
             return false;
@@ -99,7 +100,7 @@ public class FileOperations implements Operations {
         }
         System.out.println(empleados);
         return true;
-}
+    }
 
     /**
      * Actualiza la informacion del ficher0
@@ -108,7 +109,6 @@ public class FileOperations implements Operations {
      * @return true/false
      */
     protected boolean updateFile(Set<Empleado> empleados, File file){
-        String path = file.getAbsolutePath();
         try {
             file.delete();
             file.createNewFile();
